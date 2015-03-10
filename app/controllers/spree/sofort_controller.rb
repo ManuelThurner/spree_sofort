@@ -23,6 +23,8 @@ class Spree::SofortController < ApplicationController
       order.finalize!
       order.state = "complete"
       order.save!
+      # Added by Manuel Thurner <manuel@volo.de> to reflect our custom data model
+      sofort_payment.type_label = 'sofort'
       sofort_payment.complete!
       session[:order_id] = nil
       flash[:success] = I18n.t("sofort.completed_successfully")
