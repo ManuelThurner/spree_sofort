@@ -6,6 +6,10 @@ class Spree::SofortController < ApplicationController
     # changed by Manuel Thurner - if there are multiple with the same sofort hash, take the last one.
     # this can happen if a previous attempt to checkout with sofort was unsuccessful
     sofort_payment = Spree::Payment.unscoped.where(sofort_hash: params[:sofort_hash]).order('created_at DESC').first
+
+    Rails.logger.warn(params.inspect)
+    Rails.logger.warn(sofort_payment.inspect)
+
     if params.blank? or params[:sofort_hash].blank? or sofort_payment.blank?
        flash[:error] = I18n.t("sofort.payment_not_found")
        redirect_to '/checkout/payment', :status => 302
