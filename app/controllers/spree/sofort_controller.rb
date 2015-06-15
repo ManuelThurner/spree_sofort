@@ -33,7 +33,7 @@ class Spree::SofortController < ApplicationController
       sofort_payment.type_label = 'sofort'
       sofort_payment.complete!
       session[:order_id] = nil
-      flash[:success] = I18n.t("sofort.completed_successfully")
+      flash[:order_completed] = I18n.t("sofort.completed_successfully")
       success_redirect order
     end
 
